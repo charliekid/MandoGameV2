@@ -10,6 +10,10 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
     private Animator anim;
 
+    public bool Blaster = false;
+    public int Grenade = 0;
+    public int health = 100;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();

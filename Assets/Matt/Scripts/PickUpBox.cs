@@ -20,8 +20,8 @@ public class PickUpBox : MonoBehaviour
     void OnTriggerEnter2D()
     {
         //Accessing the player script for reasons
-        GameObject thePlayer = GameObject.Find("PlayerTest");
-        PlayerTest playerScript = thePlayer.GetComponent<PlayerTest>();
+        GameObject thePlayer = GameObject.Find("Player");
+        Player playerScript = thePlayer.GetComponent<Player>();
         //Gives the item according to what item this script is attached to.
         if(gameObject.name == "Blaster")
         {
