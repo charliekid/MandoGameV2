@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     float moveSpeed = 2;
+    float speed = 10;
     public GameObject bullet;
     public Transform shootingOffset;
     private Rigidbody rb;
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
             // Moves player left and faces left
             transform.localRotation = Quaternion.Euler(0, 180, 0);
             transform.Translate(new Vector3(-horizontalInput, 0, 0) * moveSpeed * Time.deltaTime);
+            Walk();
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
@@ -32,7 +34,12 @@ public class Player : MonoBehaviour
             // Moves player right and faces right
             transform.localRotation = Quaternion.Euler(0, 0, 0);
             transform.Translate(new Vector3(horizontalInput, 0, 0) * moveSpeed * Time.deltaTime);
+            Walk();
         }
+
+        // Moves player back and front by axis and transform
+        float zAxis = Input.GetAxis("Vertical");
+        transform.Translate(new Vector3(0, 0, zAxis) * moveSpeed * Time.deltaTime);
 
         // When 'Space' is pressed, player shoots
         if (Input.GetKeyDown(KeyCode.Space))
@@ -44,21 +51,35 @@ public class Player : MonoBehaviour
             Destroy(shot, 3f);
         }
 
-        // Moves player up and down by axis and transform
-        float verticalInput = Input.GetAxis("Vertical");
-        transform.Translate(new Vector3(0, 0, verticalInput) * moveSpeed * Time.deltaTime);
-
-        // When pressing 'S', player attacks (punches)
+        // When pressing 'S', player punches
         if (Input.GetKeyDown(KeyCode.S))
         {
-            Attack();
+            Punch();
+        }
+
+        // When pressing 'D', player kicks
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Kick();
         }
     }
 
-    void Attack()
+    void Punch()
     {
         // Animation for attack
-        anim.SetTrigger("Attack");
+        anim.SetTrigger("Punch");
+    }
+
+    void Kick()
+    {
+        // Animation for kicking
+        anim.SetTrigger("Kick");
+    }
+
+    void Walk()
+    {
+        // Animation for walking
+        anim.SetTrigger("Walk");
     }
 
 }
