@@ -16,6 +16,10 @@ public class Enemy : MonoBehaviour
     private bool isFacingRight = true;
 
     private Vector3 facingDirection = Vector3.left;
+
+    //health
+    public int health = 100;
+    public HealthBar healthbar;
     
     
     // Start is called before the first frame update
@@ -23,11 +27,23 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         //InvokeRepeating("MoveEnemy", .1f, .3f);
+
+        //Health intialize
+        healthbar.SetMaxHealth(100);
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Die
+        if(health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+
+        //HealthBar
+        healthbar.SetHealth(health);
+
         enemy.position += (facingDirection * speed * Time.deltaTime) / 2;
         enemy.GetComponent<Animator>().SetTrigger("Walk");
         // velocityEnemy = Input.GetAxis("EnemyInput");
@@ -87,13 +103,20 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("We hit the player!");
+            Debug.Log("print enemy health: "+health);
             // We need it to throw a punch. 
-            //enemy.GetComponent<Animator>().SetTrigger("Punch");
+            enemy.GetComponent<Animator>().SetTrigger("Idle");
+            speed = 0;
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        healthbar.SetHealth(health);
     }
 }

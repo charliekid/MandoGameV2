@@ -16,10 +16,15 @@ public class Player : MonoBehaviour
     public int Grenade = 0;
     public bool Blaster = false;
 
+    public HealthBar healthbar;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+
+        //Health intialize
+        healthbar.SetMaxHealth(100);
     }
 
     void Update()
@@ -69,6 +74,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.tag == "Enemy")
+        {
+            Debug.Log("Get Rekt Kid");
+            Enemy currentEnemy = other.gameObject.GetComponent<Enemy>(); //Long ago in a land far away, there once was a 
+            currentEnemy.health -= 30;
+            Debug.Log("Enemy Health from Player Perspective" + currentEnemy.health);
+            //currentEnemy.TakeDamage(30);
+            //Destroy(other);
+        }
+    }
+
     void Punch()
     {
         // Animation for attack
@@ -85,6 +103,12 @@ public class Player : MonoBehaviour
     {
         // Animation for walking
         anim.SetTrigger("Walk");
+    }
+
+    void TakeDamage(int damage)
+    {
+        health -= damage;
+        healthbar.SetHealth(health);
     }
 
 }
