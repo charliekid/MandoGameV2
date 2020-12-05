@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98943710-b054-4d86-a882-46ea53ea53bc" name="Default Changelist" comment="" />
+    <list default="true" id="98943710-b054-4d86-a882-46ea53ea53bc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MandoGameV2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MandoGameV2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Charlie/Scenes/CharlieScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Charlie/Scenes/CharlieScene.unity" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,7 +59,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606982470894</updated>
-      <workItem from="1606982510179" duration="808000" />
+      <workItem from="1606982510179" duration="1337000" />
     </task>
     <servers />
   </component>
