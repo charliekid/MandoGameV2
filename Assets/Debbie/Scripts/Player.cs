@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         {
             Debug.Log("Get Rekt Kid");
-            Enemy currentEnemy = other.gameObject.GetComponent<Enemy>(); //Long ago in a land far away, there once was a knight who went to slay a dragon. Along their journey they met a scarecrow 
+            Enemy currentEnemy = other.gameObject.GetComponent<Enemy>(); //Long ago in a land far away, there once was a knight who went to slay a dragon. Along their journey they met a scarecrow who, contrary to popular tales, wasn't missing his brain
             currentEnemy.health -= 30;
             Debug.Log("Enemy Health from Player Perspective" + currentEnemy.health);
             //currentEnemy.TakeDamage(30);
