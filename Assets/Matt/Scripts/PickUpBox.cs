@@ -5,6 +5,7 @@ using UnityEngine;
 public class PickUpBox : MonoBehaviour
 {
     private float healthCompare = 0;
+    private float healthGainer = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,7 @@ public class PickUpBox : MonoBehaviour
         
     }
 
-    void OnTriggerEnter2D()
+    void OnTriggerEnter()
     {
         //Accessing the player script for reasons
         GameObject thePlayer = GameObject.Find("Player");
@@ -28,11 +29,15 @@ public class PickUpBox : MonoBehaviour
             //Enables Player to shoot
             playerScript.Blaster = true;
             Debug.Log("Hello!");
+
+            Destroy(gameObject);
         }
         else if (gameObject.name == "Grenade")
         {
             //Gives Player Grenade
             playerScript.Grenade += 1;
+
+            Destroy(gameObject);
         }
         else if (gameObject.name == "HealthPack")
         {
@@ -45,6 +50,7 @@ public class PickUpBox : MonoBehaviour
                     playerScript.health += 1;
                 }
             }
+            Destroy(gameObject);
         }
         
     }
