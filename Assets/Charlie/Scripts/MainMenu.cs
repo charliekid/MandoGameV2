@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    //public AudioClip sound;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +15,11 @@ public class MainMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        /*
+        AudioSource audio1 = GetComponent<AudioSource>();
+        audio1.clip = sound;
+        audio1.Play();
+        */
     }
 
     public void PlayGame()
