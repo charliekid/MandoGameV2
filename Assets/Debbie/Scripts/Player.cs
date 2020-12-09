@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
 
     public bool MoveBack = true;
 
+    public bool Punching = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -61,6 +63,7 @@ public class Player : MonoBehaviour
         
 
         // When 'Space' is pressed, player shoots
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // Instantiates new copy of the bullet prefab
@@ -69,15 +72,21 @@ public class Player : MonoBehaviour
             // Shot is destroyed after 3 sec
             Destroy(shot, 3f);
         }
+        */
 
         // When pressing 'S', player punches
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
             Punch();
+            Punching = true;
+        }
+        else
+        {
+            Punching = false;
         }
 
         // When pressing 'D', player kicks
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
             Kick();
         }
@@ -99,6 +108,14 @@ public class Player : MonoBehaviour
         {
             MoveBack = true;
         }
+
+
+        healthbar.SetHealth(health);
+        if (health <= 0)
+        {
+            //Destroy(gameObject);
+            //Send them to the GameOver Screen
+        }
         
     }
 
@@ -106,10 +123,19 @@ public class Player : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
-            Debug.Log("Get Rekt Kid");
-            Enemy currentEnemy = other.gameObject.GetComponent<Enemy>(); //Long ago in a land far away, there once was a knight who went to slay a dragon. Along their journey they met a scarecrow who, contrary to popular tales, wasn't missing his brain
-            currentEnemy.health -= 30;
-            Debug.Log("Enemy Health from Player Perspective" + currentEnemy.health);
+            if(Punching == true)
+            {
+                Debug.Log("Get Rekt Kid");
+                Enemy currentEnemy = other.gameObject.GetComponent<Enemy>(); //Long ago in a land far away, there once was a knight who went to slay a dragon. Along their journey they met a scarecrow who, contrary to popular tales, wasn't missing his brain
+                currentEnemy.health -= 30;
+                Debug.Log("Enemy Health from Player Perspective" + currentEnemy.health);
+            }
+            else
+            {
+                Debug.Log("I have taken damage");
+                health -= 25;
+            }
+            
             //currentEnemy.TakeDamage(30);
             //Destroy(other);
         }
