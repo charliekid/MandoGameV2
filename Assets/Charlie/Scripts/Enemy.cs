@@ -11,7 +11,8 @@ public class Enemy : MonoBehaviour
     
     private float velocityEnemy = 0;
     private float amplitude = 1;
-    private float speed = 1; 
+    private float speed = 1;
+    float duration = 0.5f;
 
     private bool isFacingRight = true;
 
@@ -20,7 +21,9 @@ public class Enemy : MonoBehaviour
     //health
     public int health = 100;
     public HealthBar healthbar;
-    
+
+
+    private int counter = 0;
     
     // Start is called before the first frame update
     
@@ -105,22 +108,37 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    IEnumerator OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Player")
         {
             enemy.GetComponent<Animator>().SetTrigger("Idle");
-            speed = -3;
-        }
-        else
-        {
+            //KnockedBack();
+            speed = -1.5f;
+            yield return new WaitForSeconds(duration);
             speed = 1;
+
         }
+        
     }
 
     public void TakeDamage(int damage)
     {
         health -= damage;
         healthbar.SetHealth(health);
+    }
+
+    private void KnockedBack()
+    {
+        if(counter < 9)
+        {
+            speed = -0.5f;
+            counter += 1;
+        }
+        else
+        {
+            speed = 1;
+            return;
+        }
     }
 }
